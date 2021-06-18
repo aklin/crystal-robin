@@ -5,6 +5,7 @@ export const BasketContext = createContext({});
 export const Actions = {
 	ADD_ITEM: 'ADD_ITEM',
 	REMOVE_ITEM: 'REMOVE_ITEM',
+	CLEAR_ALL: 'CLEAR_ALL',
 };
 
 function reducer(state, action) {
@@ -48,6 +49,10 @@ function reducer(state, action) {
 				delete newState[id];
 			}
 
+			break;
+
+		case Actions.CLEAR_ALL:
+			newState = {};
 			break;
 
 		default:

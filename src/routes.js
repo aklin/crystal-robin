@@ -17,24 +17,23 @@
 */
 // @material-ui/icons
 import Dashboard from '@material-ui/icons/Dashboard';
-import Person from '@material-ui/icons/Person';
 import DashboardPage from 'views/Dashboard/Dashboard.js';
-import Cart from './views/Cart';
+import CartView from './views/Cart';
+import { ShoppingCart } from '@material-ui/icons';
 
 const dashboardRoutes = [
 	{
 		path: '/dashboard',
 		name: 'Dashboard',
-		rtlName: 'لوحة القيادة',
 		icon: Dashboard,
 		component: DashboardPage,
 		layout: '/admin',
 	},
 	{
 		path: '/cart',
-		name: 'My Basket',
-		icon: Person,
-		component: Cart,
+		name: 'My Cart',
+		icon: ShoppingCart,
+		component: CartView,
 		layout: '/admin',
 	},
 ];
