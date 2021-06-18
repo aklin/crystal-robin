@@ -6,7 +6,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../../assets/jss/material-dashboard-react/components/tasksStyle';
 import { asArray } from '../../store/coffee';
-import Tooltip from '@material-ui/core/Tooltip';
 import { AddToCart, RemoveFromCart } from '../CustomIcons';
 
 const useStyles = makeStyles(styles);
@@ -35,27 +34,16 @@ export default function CoffeeTable({ state, cartState = {}, filter }) {
 							{trimLongText(description)}
 						</TableCell>
 						<TableCell className={classes.tableActions}>
-							<Tooltip
-								id="tooltip-top-start"
-								title="Remove from Cart"
-								placement="top"
-								classes={{ tooltip: classes.tooltip }}
-							>
-								<RemoveFromCart classes={classes} />
-							</Tooltip>
+							<RemoveFromCart
+								disabled={!lookupInCart(id, cartState)}
+								classes={classes}
+							/>
 						</TableCell>
 						<TableCell className={classes.tableCell}>
 							{lookupInCart(id, cartState)}
 						</TableCell>
 						<TableCell className={classes.tableActions}>
-							<Tooltip
-								id="tooltip-top"
-								title="Add to Cart"
-								placement="top"
-								classes={{ tooltip: classes.tooltip }}
-							>
-								<AddToCart classes={classes} />
-							</Tooltip>
+							<AddToCart classes={classes} />
 						</TableCell>
 					</TableRow>
 				))}
