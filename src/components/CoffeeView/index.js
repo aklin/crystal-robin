@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Tasks from '../Tasks/Tasks';
 import { bugs, website } from '../../variables/general';
 import CustomTabs from '../CustomTabs/CustomTabs';
 import { AcUnit, Whatshot } from '@material-ui/icons';
 import { useCoffeeStore } from '../../store/coffee';
+import { doFetchCoffeeCold, doFetchCoffeeHot } from '../../actions';
 
 export default function CoffeeView() {
-	const { state, dispatch } = useCoffeeStore();
+	const { dispatch } = useCoffeeStore();
+
+	useEffect(() => {
+		Promise.all([doFetchCoffeeCold(dispatch), doFetchCoffeeHot(dispatch)]);
+	}, []);
+
+	useEffect(() => {}, []);
 
 	return (
 		<CustomTabs

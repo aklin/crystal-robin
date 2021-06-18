@@ -11,9 +11,9 @@ export const Actions = {
 export const asArray = (object = {}) =>
 	Object.keys(object)
 		.map((key) => object[key])
-		.reduce((acc, curr) => acc.push(curr), []);
+		.reduce((acc, curr) => acc.push(curr) && acc, []);
 
-const mapArray = ({ data, prefixIdWith = '', idField = 'id' }) =>
+const mapArray = ({ data = [], prefixIdWith = '', idField = 'id' }) =>
 	data
 		.filter((o) => typeof o === 'object')
 		.map((entry) => ({ [`${prefixIdWith}${entry[idField]}`]: entry }))
@@ -21,7 +21,7 @@ const mapArray = ({ data, prefixIdWith = '', idField = 'id' }) =>
 
 function reducer(state, action) {
 	const { type, data } = action;
-	const debug = false;
+	const debug = true;
 	let newState = state;
 
 	if (debug) {
@@ -41,10 +41,13 @@ function reducer(state, action) {
 
 			newState = deepmerge(
 				state,
-				mapArray({ data, prefixIdWith: 'hot_' }).map((o) => ({
-					...o,
-					type: 'hot',
-				}))
+				mapArray({
+					data: data.map((o) => ({
+						...o,
+						type: 'hot',
+					})),
+					prefixIdWith: 'hot_',
+				})
 			);
 			break;
 		case Actions.ADD_COLD_DRINKS:
@@ -55,10 +58,13 @@ function reducer(state, action) {
 
 			newState = deepmerge(
 				state,
-				mapArray({ data, prefixIdWith: 'cold_' }).map((o) => ({
-					...o,
-					type: 'iced',
-				}))
+				mapArray({
+					data: data.map((o) => ({
+						...o,
+						type: 'iced',
+					})),
+					prefixIdWith: 'cold_',
+				})
 			);
 			break;
 		default:
@@ -72,7 +78,7 @@ function reducer(state, action) {
 		console.groupEnd();
 	}
 
-	return newState;
+	return { ...newState };
 }
 
 export const useCoffeeStore = () => {

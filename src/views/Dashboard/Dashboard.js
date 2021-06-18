@@ -1,8 +1,4 @@
 import React from 'react';
-// react plugin for creating charts
-// @material-ui/core
-// @material-ui/icons
-// core components
 import GridItem from 'components/Grid/GridItem.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import Card from 'components/Card/Card.js';

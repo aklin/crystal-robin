@@ -1,5 +1,5 @@
 import { doGet } from './api';
-import { Actions } from '../store';
+import { Actions } from '../store/coffee';
 
 export const doFetchCoffeeHot = async (dispatch) => {
 	const data = await doGet('hot');

@@ -1,21 +1,26 @@
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import Admin from './layouts/Admin';
-import RTL from './layouts/RTL';
 import React from 'react';
-import { useInitialiseCoffeeStore } from './store/coffee';
-import { useInitialiseBasket } from './store/basket';
+import { CoffeeContext, useInitialiseCoffeeStore } from './store/coffee';
+import { BasketContext, useInitialiseBasket } from './store/basket';
+import Admin from './layouts/Admin';
 
 export default function App() {
-	useInitialiseCoffeeStore();
-	useInitialiseBasket();
+	const { state, dispatch } = useInitialiseCoffeeStore();
+	const { state: basketState, dispatch: basketDispatch } =
+		useInitialiseBasket();
 
 	return (
-		<BrowserRouter>
-			<Switch>
-				<Route path="/admin" component={Admin} />
-				<Route path="/rtl" component={RTL} />
-				<Redirect from="/" to="/admin/dashboard" />
-			</Switch>
-		</BrowserRouter>
+		<CoffeeContext.Provider value={{ state, dispatch }}>
+			<BasketContext.Provider
+				value={{ state: basketState, dispatch: basketDispatch }}
+			>
+				<BrowserRouter>
+					<Switch>
+						<Route path="/admin" component={Admin} />
+						<Redirect from="/" to="/admin/dashboard" />
+					</Switch>
+				</BrowserRouter>
+			</BasketContext.Provider>
+		</CoffeeContext.Provider>
 	);
 }
