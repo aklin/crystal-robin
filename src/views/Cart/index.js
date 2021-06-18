@@ -1,7 +1,5 @@
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
-import CoffeeWidget from '../../components/CoffeeWidget';
-import Card from '../../components/Card/Card';
 import CoffeeView from '../../components/CoffeeView';
 import React from 'react';
 

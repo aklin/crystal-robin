@@ -19,7 +19,6 @@
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 import DashboardPage from 'views/Dashboard/Dashboard.js';
-import React from 'react';
 import Cart from './views/Cart';
 
 const dashboardRoutes = [
