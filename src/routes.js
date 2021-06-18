@@ -18,10 +18,9 @@
 // @material-ui/icons
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
-// core components/views for Admin layout
 import DashboardPage from 'views/Dashboard/Dashboard.js';
 import React from 'react';
-// core components/views for RTL layout
+import Cart from './views/Cart';
 
 const dashboardRoutes = [
 	{
@@ -36,7 +35,7 @@ const dashboardRoutes = [
 		path: '/cart',
 		name: 'My Basket',
 		icon: Person,
-		component: <></>,
+		component: Cart,
 		layout: '/admin',
 	},
 ];
