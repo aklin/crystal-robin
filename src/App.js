@@ -6,16 +6,16 @@ import { useInitialiseCoffeeStore } from './store/coffee';
 import { useInitialiseBasket } from './store/basket';
 
 export default function App() {
-  useInitialiseCoffeeStore();
-  useInitialiseBasket();
+	useInitialiseCoffeeStore();
+	useInitialiseBasket();
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/admin" component={Admin} />
-        <Route path="/rtl" component={RTL} />
-        <Redirect from="/" to="/admin/dashboard" />
-      </Switch>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path="/admin" component={Admin} />
+				<Route path="/rtl" component={RTL} />
+				<Redirect from="/" to="/admin/dashboard" />
+			</Switch>
+		</BrowserRouter>
+	);
 }
