@@ -8,6 +8,7 @@ import styles from '../../assets/jss/material-dashboard-react/components/tasksSt
 import { asArray } from '../../store/coffee';
 import { AddToCart, RemoveFromCart } from '../CustomIcons';
 import { Actions } from '../../store/basket';
+import { Chip } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 
@@ -38,6 +39,13 @@ export default function CoffeeTable({
 						<TableCell className={classes.tableCell}>{title}</TableCell>
 						<TableCell className={classes.tableCell} title={description}>
 							{trimLongText(description)}
+						</TableCell>
+						<TableCell>
+							{ingredients.map((ing) => (
+								<Chip key={ing} label={ing}>
+									{ing}
+								</Chip>
+							))}
 						</TableCell>
 						<TableCell className={classes.tableActions}>
 							<RemoveFromCart

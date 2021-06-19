@@ -1,5 +1,4 @@
 import { createContext, useContext, useReducer } from 'react';
-import deepmerge from 'deepmerge';
 
 export const CoffeeContext = createContext({});
 
@@ -39,17 +38,17 @@ function reducer(state, action) {
 				break;
 			}
 
-			newState = deepmerge(
-				state,
-				mapArray({
+			newState = {
+				...state,
+				...mapArray({
 					data: data.map((o) => ({
 						...o,
 						type: 'hot',
 						uid: `hot_${o.id}`,
 					})),
 					prefixIdWith: 'hot_',
-				})
-			);
+				}),
+			};
 			break;
 		case Actions.ADD_COLD_DRINKS:
 			if (!Array.isArray(data)) {
@@ -57,17 +56,18 @@ function reducer(state, action) {
 				break;
 			}
 
-			newState = deepmerge(
-				state,
-				mapArray({
+			newState = {
+				...state,
+				...mapArray({
 					data: data.map((o) => ({
 						...o,
 						type: 'iced',
 						uid: `iced_${o.id}`,
 					})),
 					prefixIdWith: 'iced_',
-				})
-			);
+				}),
+			};
+
 			break;
 		default:
 			console.warn(`Unrecognised action type: ${type}`);
