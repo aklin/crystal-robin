@@ -5,12 +5,12 @@ export const BasketContext = createContext({});
 export const Actions = {
 	ADD_TO_CART: 'ADD_TO_CART',
 	REMOVE_FROM_CART: 'REMOVE_FROM_CART',
+	SET_CART_QTY: 'SET_CART_QTY',
 	CLEAR_ALL: 'CLEAR_ALL',
 };
 
 function reducer(state, action) {
-	const { type, data = {} } = action;
-	const { uid } = data;
+	const { type, uid, qty } = action;
 	const debug = false;
 	let newState = state;
 
@@ -21,8 +21,6 @@ function reducer(state, action) {
 		console.group(`Basket [${type}]`);
 		console.log('State:');
 		console.log(state);
-		console.log('Data:');
-		console.log(data);
 	}
 
 	switch (type) {
@@ -48,6 +46,21 @@ function reducer(state, action) {
 			} else {
 				delete newState[uid];
 			}
+
+			break;
+
+		case Actions.SET_CART_QTY:
+			if (!uid) {
+				console.warn(`[${type}]: Missing ID, returning`);
+				break;
+			}
+
+			if (!qty) {
+				console.warn(`[${type}]: Missing qty, returning`);
+				break;
+			}
+
+			newState = { ...state, [uid]: Math.max(0, Number(qty)) };
 
 			break;
 
