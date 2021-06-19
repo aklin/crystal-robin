@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import CustomTabs from '../CustomTabs/CustomTabs';
-import { AcUnit, AllInclusive, Whatshot } from '@material-ui/icons';
+import { AllInclusive } from '@material-ui/icons';
 import { useCoffeeStore } from '../../store/coffee';
 import { doFetchCoffeeCold, doFetchCoffeeHot } from '../../actions';
 import CoffeeTable from '../CoffeeTable';
 import { useBasket } from '../../store/basket';
+import { ColdIcon, HotIcon } from '../AppIcons';
 
 export default function CoffeeView() {
 	const { state, dispatch } = useCoffeeStore();
@@ -32,7 +33,7 @@ export default function CoffeeView() {
 				},
 				{
 					tabName: 'Hot',
-					tabIcon: Whatshot,
+					tabIcon: HotIcon,
 					tabContent: (
 						<CoffeeTable
 							state={state}
@@ -43,8 +44,8 @@ export default function CoffeeView() {
 					),
 				},
 				{
-					tabName: 'Cold',
-					tabIcon: AcUnit,
+					tabName: 'Iced',
+					tabIcon: ColdIcon,
 					tabContent: (
 						<CoffeeTable
 							state={state}
