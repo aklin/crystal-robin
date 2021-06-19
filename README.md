@@ -6,7 +6,7 @@
 > Note: `Block` elements in this document are navigable when referring to files or components; you can 
 > click them and go to the code immediately.
 
-Run the following commands to get the app started right away:
+Check out this repo and run the following commands to get the app started:
 
 ```bash
 yarn && yarn run start
@@ -15,10 +15,10 @@ yarn && yarn run start
 The best place to start examining the code is [`App.js`][c-app], which sets up the Context and routing, followed
 by [`router.js`][c-router]
 
-## Operational Walkthrough
+## Fetching API data
 
-The first thing the App does is to fetch data from the API. Since the [`Dashboard`][c-dash] component is on the
-default route, the task of loading the data falls to one of its children, [`CoffeeView`][c-coffeeview].
+The [`CoffeeView`][c-coffeeview] component gives us a tabbed view of our coffee types. As it sits on the default route,
+it is also responsible for fetching data from the API, 
 
 If a user goes to the `/admin/cart` route instead, their Coffee store will not be populated. 
 This has no adverse effects in our case, because the presence of the coffee store does not impact 
@@ -36,6 +36,23 @@ combines the two anyway.
 
 Since hot and iced coffees use the same ID range, the Store saves two additional fields: `type` and `uid`.
 `type` is either `iced` or `hot`, and the unique ID (`uid`) is a concatenation of type and ID.
+
+
+## Ingredients and Updating the Cart
+
+The Cart store is a object with the following schema:
+
+```
+{
+  [uid]: number
+}
+```
+
+Users can add and remove items from the cart incrementally, or they can manually set the exact number by
+updating the text field.
+
+This gives us a scalable way to calculate the number of ingredients, as it boils down to a multiplication based
+on the number of distinct `uid` entries in the cart.
 
 ## Layout
 
