@@ -15,13 +15,18 @@ export default function CartDetails({ cartState, cartDispatch, coffeeState }) {
 		.filter(({ id, type }) => coffeeState[`${type}_${id}`])
 		.map(({ ingredients }) => ingredients);
 
-	console.log(ingredients);
+	const cartRows = Object.keys(cartState)
+		.map((uid) => coffeeState[uid])
+		.map(({ title, uid }) => [title, `${cartState[uid]}`]);
 
 	return (
 		<Card>
 			<CardHeader>title</CardHeader>
 			<CardBody>
-				<CustomTable tableHead={['Item Name', 'Quantity']} tableData={[]} />
+				<CustomTable
+					tableHead={['Item Name', 'Quantity']}
+					tableData={cartRows}
+				/>
 
 				<CustomTable tableHead={['Ingredient', 'Quantity']} tableData={[]} />
 			</CardBody>
