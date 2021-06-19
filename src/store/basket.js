@@ -61,7 +61,7 @@ function reducer(state, action) {
 				break;
 			}
 
-			if (qty === 0 && newState[uid] !== undefined) {
+			if (qty <= 0 && newState[uid] !== undefined) {
 				delete newState[uid];
 				newState = { ...newState };
 			} else {
