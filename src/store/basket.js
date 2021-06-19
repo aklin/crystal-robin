@@ -9,7 +9,7 @@ export const Actions = {
 };
 
 function reducer(state, action) {
-	const { type, data } = action;
+	const { type, data = {} } = action;
 	const { uid } = data;
 	const debug = false;
 	let newState = state;
@@ -54,7 +54,6 @@ function reducer(state, action) {
 		case Actions.CLEAR_ALL:
 			newState = {};
 			break;
-
 		default:
 			console.warn(`Unrecognised action type: ${type}`);
 			break;
