@@ -41,10 +41,11 @@ function reducer(state, action) {
 			newValue = Math.max(0, oldValue - 1);
 
 			//remove entries with 0 items
-			if (newValue >= 0) {
-				newState = { ...state, [uid]: newValue };
-			} else {
+			if (newValue <= 0) {
 				delete newState[uid];
+				newState = { ...newState };
+			} else {
+				newState = { ...state, [uid]: newValue };
 			}
 
 			break;
