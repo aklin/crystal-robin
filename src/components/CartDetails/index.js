@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Card from '../Card/Card';
 import CardHeader from '../Card/CardHeader';
 import CardBody from '../Card/CardBody';
@@ -19,17 +19,25 @@ const mergeStores = (cartState, coffeeState) =>
 		}));
 
 export default function CartDetails({ cartState, cartDispatch, coffeeState }) {
-	const merged = mergeStores(cartState, coffeeState);
+	const merged = useMemo(
+		() => mergeStores(cartState, coffeeState),
+		[cartState]
+	);
 	const cartEmpty = !Object.keys(cartState).length;
 
 	const cartRows = merged.map(({ title, inCart }) => [title, `${inCart}`]);
 
 	const ingCounts = merged
-		.map(({ ingredients }) => ingredients || [])
-		.reduce((acc, curr) => {
-			curr.forEach(
+		.map(({ inCart, ingredients }) => ({
+			inCart,
+			ingredients: ingredients || [],
+		}))
+		.reduce((acc, { inCart, ingredients }) => {
+			ingredients.forEach(
 				(ingredient) =>
-					(acc[ingredient] = acc[ingredient] ? acc[ingredient] + 1 : 1)
+					(acc[ingredient] = acc[ingredient]
+						? acc[ingredient] + inCart
+						: inCart)
 			);
 			return acc;
 		}, {});
