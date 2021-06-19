@@ -23,8 +23,6 @@ export default function CartActions({ classes, uid, cartState, cartDispatch }) {
 				formControlProps={{}}
 				id={uid}
 				inputProps={{
-					type: 'number',
-					min: '0',
 					value: lookupInCart(uid, cartState),
 					onChange: (e) => {
 						e.preventDefault();
