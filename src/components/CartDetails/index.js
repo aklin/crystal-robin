@@ -24,8 +24,6 @@ export default function CartDetails({ cartState, cartDispatch, coffeeState }) {
 
 	const cartRows = merged.map(({ title, inCart }) => [title, `${inCart}`]);
 
-	console.log(merged);
-
 	const ingCounts = merged
 		.map(({ ingredients }) => ingredients || [])
 		.reduce((acc, curr) => {

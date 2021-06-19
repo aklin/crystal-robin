@@ -1,11 +1,12 @@
 import {
-	defaultFont,
-	primaryColor,
 	dangerColor,
+	defaultFont,
 	grayColor,
+	primaryColor,
 } from 'assets/jss/material-dashboard-react.js';
 import tooltipStyle from 'assets/jss/material-dashboard-react/tooltipStyle.js';
 import checkboxAdnRadioStyle from 'assets/jss/material-dashboard-react/checkboxAdnRadioStyle.js';
+
 const tasksStyle = {
 	...tooltipStyle,
 	...checkboxAdnRadioStyle,
@@ -52,6 +53,16 @@ const tasksStyle = {
 		backgroundColor: 'transparent',
 		color: dangerColor[0],
 		boxShadow: 'none',
+	},
+	cartActionsCell: {
+		display: 'flex',
+		flexDirection: 'row',
+		flexWrap: 'nowrap',
+		alignContent: 'center',
+		alignItems: 'center',
+	},
+	ingredientTag: {
+		margin: '2px 4px',
 	},
 };
 export default tasksStyle;

@@ -6,13 +6,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../../assets/jss/material-dashboard-react/components/tasksStyle';
 import { asArray } from '../../store/coffee';
-import { AddToCart, RemoveFromCart } from '../CustomIcons';
-import { Actions } from '../../store/basket';
 import { Chip } from '@material-ui/core';
+import CartActions from '../CartActions';
 
 const useStyles = makeStyles(styles);
-
-const lookupInCart = (uid, cartState) => cartState[uid] || 0;
 
 const trimLongText = (text = '') =>
 	text.length < 76 ? text : text.substr(0, 72) + '...';
@@ -29,8 +26,6 @@ export default function CoffeeTable({
 		.filter((item) => (typeof filter === 'function' ? filter(item) : true))
 		.sort((a, b) => a.title.localeCompare(b.title));
 
-	console.log(cartState);
-
 	return (
 		<Table className={classes.table}>
 			<TableBody>
@@ -41,35 +36,22 @@ export default function CoffeeTable({
 							{trimLongText(description)}
 						</TableCell>
 						<TableCell>
-							{ingredients.map((ing) => (
-								<Chip key={ing} label={ing}>
-									{ing}
-								</Chip>
-							))}
+							<span>
+								{ingredients.map((ing) => (
+									<Chip
+										className={classes.ingredientTag}
+										key={ing}
+										label={ing}
+									/>
+								))}
+							</span>
 						</TableCell>
 						<TableCell className={classes.tableActions}>
-							<RemoveFromCart
-								disabled={!lookupInCart(uid, cartState)}
+							<CartActions
 								classes={classes}
-								onClick={(e) => {
-									e.preventDefault();
-									cartDispatch({
-										type: Actions.REMOVE_FROM_CART,
-										data: { uid },
-									});
-								}}
-							/>
-						</TableCell>
-						<TableCell className={classes.tableCell}>
-							{lookupInCart(uid, cartState)}
-						</TableCell>
-						<TableCell className={classes.tableActions}>
-							<AddToCart
-								classes={classes}
-								onClick={(e) => {
-									e.preventDefault();
-									cartDispatch({ type: Actions.ADD_TO_CART, data: { uid } });
-								}}
+								uid={uid}
+								cartState={cartState}
+								cartDispatch={cartDispatch}
 							/>
 						</TableCell>
 					</TableRow>
