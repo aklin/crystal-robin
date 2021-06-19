@@ -1,4 +1,4 @@
-import { AddToCart, RemoveFromCart } from '../CustomIcons';
+import { AddToCart, RemoveAll, RemoveFromCart } from '../CustomIcons';
 import { Actions } from '../../store/basket';
 import React from 'react';
 import CustomInput from '../CustomInput/CustomInput';
@@ -26,13 +26,13 @@ export default function CartActions({ classes, uid, cartState, cartDispatch }) {
 					value: lookupInCart(uid, cartState),
 					onChange: (e) => {
 						e.preventDefault();
-						const value = e.target.value.trim();
+						const value = Number(e.target.value.trim());
 
 						!isNaN(value) &&
 							cartDispatch({
 								type: Actions.SET_CART_QTY,
 								uid,
-								qty: Number(value),
+								qty: value,
 							});
 					},
 				}}
@@ -42,6 +42,14 @@ export default function CartActions({ classes, uid, cartState, cartDispatch }) {
 				onClick={(e) => {
 					e.preventDefault();
 					cartDispatch({ type: Actions.ADD_TO_CART, uid });
+				}}
+			/>
+			<RemoveAll
+				disabled={!lookupInCart(uid, cartState)}
+				classes={classes}
+				onClick={(e) => {
+					e.preventDefault();
+					cartDispatch({ type: Actions.SET_CART_QTY, qty: 0, uid });
 				}}
 			/>
 		</div>

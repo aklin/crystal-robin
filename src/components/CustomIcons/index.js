@@ -1,4 +1,8 @@
-import { RemoveShoppingCart, ShoppingCartOutlined } from '@material-ui/icons';
+import {
+	Delete,
+	RemoveShoppingCart,
+	ShoppingCartOutlined,
+} from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
 import { Tooltip } from '@material-ui/core';
@@ -38,6 +42,31 @@ export const RemoveFromCart = ({ onClick, classes, disabled = false }) => (
 				onClick={onClick}
 			>
 				<RemoveShoppingCart
+					className={classnames(
+						classes.tableActionButtonIcon,
+						!disabled && classes.close
+					)}
+				/>
+			</IconButton>
+		</div>
+	</Tooltip>
+);
+
+export const RemoveAll = ({ onClick, classes, disabled = false }) => (
+	<Tooltip
+		id="tooltip-top-start"
+		title="Remove all instances"
+		placement="top"
+		classes={{ tooltip: classes.tooltip }}
+	>
+		<div>
+			<IconButton
+				disabled={disabled}
+				aria-label="Remove all instances"
+				className={classes.tableActionButton}
+				onClick={onClick}
+			>
+				<Delete
 					className={classnames(
 						classes.tableActionButtonIcon,
 						!disabled && classes.close

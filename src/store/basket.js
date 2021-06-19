@@ -56,7 +56,7 @@ function reducer(state, action) {
 				break;
 			}
 
-			if (!qty) {
+			if (isNaN(qty)) {
 				console.warn(`[${type}]: Missing qty, returning`);
 				break;
 			}
