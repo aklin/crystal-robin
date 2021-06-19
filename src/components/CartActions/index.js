@@ -23,14 +23,19 @@ export default function CartActions({ classes, uid, cartState, cartDispatch }) {
 				formControlProps={{}}
 				id={uid}
 				inputProps={{
+					type: 'number',
+					min: '0',
 					value: lookupInCart(uid, cartState),
 					onChange: (e) => {
 						e.preventDefault();
-						cartDispatch({
-							type: Actions.SET_CART_QTY,
-							uid,
-							qty: e.target.value,
-						});
+						const value = e.target.value.trim();
+
+						!isNaN(value) &&
+							cartDispatch({
+								type: Actions.SET_CART_QTY,
+								uid,
+								qty: Number(value),
+							});
 					},
 				}}
 			/>
