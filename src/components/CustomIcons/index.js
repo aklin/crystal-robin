@@ -4,14 +4,18 @@ import React from 'react';
 import { Tooltip } from '@material-ui/core';
 import classnames from 'classnames';
 
-export const AddToCart = ({ classes }) => (
+export const AddToCart = ({ onClick, classes }) => (
 	<Tooltip
 		id="tooltip-top-start"
 		title="Add to Cart"
 		placement="top"
 		classes={{ tooltip: classes.tooltip }}
 	>
-		<IconButton aria-label="Add" className={classes.tableActionButton}>
+		<IconButton
+			aria-label="Add"
+			className={classes.tableActionButton}
+			onClick={onClick}
+		>
 			<ShoppingCartOutlined
 				className={classes.tableActionButtonIcon + ' ' + classes.edit}
 			/>
@@ -19,7 +23,7 @@ export const AddToCart = ({ classes }) => (
 	</Tooltip>
 );
 
-export const RemoveFromCart = ({ classes, disabled = false }) => (
+export const RemoveFromCart = ({ onClick, classes, disabled = false }) => (
 	<Tooltip
 		id="tooltip-top-start"
 		title="Remove from Cart"
@@ -30,6 +34,7 @@ export const RemoveFromCart = ({ classes, disabled = false }) => (
 			disabled={disabled}
 			aria-label="Remove"
 			className={classes.tableActionButton}
+			onClick={onClick}
 		>
 			<RemoveShoppingCart
 				className={classnames(
