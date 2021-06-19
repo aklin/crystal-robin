@@ -61,7 +61,12 @@ function reducer(state, action) {
 				break;
 			}
 
-			newState = { ...state, [uid]: Math.max(0, Number(qty)) };
+			if (qty === 0 && newState[uid] !== undefined) {
+				delete newState[uid];
+				newState = { ...newState };
+			} else {
+				newState = { ...state, [uid]: Math.max(0, Number(qty)) };
+			}
 
 			break;
 
