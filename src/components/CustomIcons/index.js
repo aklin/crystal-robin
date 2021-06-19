@@ -30,18 +30,20 @@ export const RemoveFromCart = ({ onClick, classes, disabled = false }) => (
 		placement="top"
 		classes={{ tooltip: classes.tooltip }}
 	>
-		<IconButton
-			disabled={disabled}
-			aria-label="Remove"
-			className={classes.tableActionButton}
-			onClick={onClick}
-		>
-			<RemoveShoppingCart
-				className={classnames(
-					classes.tableActionButtonIcon,
-					!disabled && classes.close
-				)}
-			/>
-		</IconButton>
+		<div>
+			<IconButton
+				disabled={disabled}
+				aria-label="Remove"
+				className={classes.tableActionButton}
+				onClick={onClick}
+			>
+				<RemoveShoppingCart
+					className={classnames(
+						classes.tableActionButtonIcon,
+						!disabled && classes.close
+					)}
+				/>
+			</IconButton>
+		</div>
 	</Tooltip>
 );
