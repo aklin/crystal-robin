@@ -21,7 +21,7 @@ const mapArray = ({ data = [], prefixIdWith = '', idField = 'id' }) =>
 
 function reducer(state, action) {
 	const { type, data } = action;
-	const debug = true;
+	const debug = false;
 	let newState = state;
 
 	if (debug) {
@@ -45,6 +45,7 @@ function reducer(state, action) {
 					data: data.map((o) => ({
 						...o,
 						type: 'hot',
+						uid: `hot_${o.id}`,
 					})),
 					prefixIdWith: 'hot_',
 				})
@@ -62,6 +63,7 @@ function reducer(state, action) {
 					data: data.map((o) => ({
 						...o,
 						type: 'iced',
+						uid: `cold_${o.id}`,
 					})),
 					prefixIdWith: 'cold_',
 				})

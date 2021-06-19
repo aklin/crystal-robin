@@ -3,18 +3,18 @@ import { createContext, useContext, useReducer } from 'react';
 export const BasketContext = createContext({});
 
 export const Actions = {
-	ADD_ITEM: 'ADD_ITEM',
-	REMOVE_ITEM: 'REMOVE_ITEM',
+	ADD_TO_CART: 'ADD_TO_CART',
+	REMOVE_FROM_CART: 'REMOVE_FROM_CART',
 	CLEAR_ALL: 'CLEAR_ALL',
 };
 
 function reducer(state, action) {
 	const { type, data } = action;
-	const { id } = data;
+	const { uid } = data;
 	const debug = false;
 	let newState = state;
 
-	const oldValue = state[id] || 0;
+	const oldValue = state[uid] || 0;
 	let newValue = oldValue;
 
 	if (debug) {
@@ -26,16 +26,16 @@ function reducer(state, action) {
 	}
 
 	switch (type) {
-		case Actions.ADD_ITEM:
-			if (!id) {
+		case Actions.ADD_TO_CART:
+			if (!uid) {
 				console.warn(`[${type}]: Missing ID, returning`);
 				break;
 			}
 
-			newState = { ...state, [id]: oldValue + 1 };
+			newState = { ...state, [uid]: oldValue + 1 };
 			break;
-		case Actions.REMOVE_ITEM:
-			if (!id) {
+		case Actions.REMOVE_FROM_CART:
+			if (!uid) {
 				console.warn(`[${type}]: Missing ID, returning`);
 				break;
 			}
@@ -44,9 +44,9 @@ function reducer(state, action) {
 
 			//remove entries with 0 items
 			if (newValue > 0) {
-				newState = { ...state, [id]: newValue };
+				newState = { ...state, [uid]: newValue };
 			} else {
-				delete newState[id];
+				delete newState[uid];
 			}
 
 			break;
