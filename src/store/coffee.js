@@ -63,9 +63,9 @@ function reducer(state, action) {
 					data: data.map((o) => ({
 						...o,
 						type: 'iced',
-						uid: `cold_${o.id}`,
+						uid: `iced_${o.id}`,
 					})),
-					prefixIdWith: 'cold_',
+					prefixIdWith: 'iced_',
 				})
 			);
 			break;
