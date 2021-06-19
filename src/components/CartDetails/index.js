@@ -9,10 +9,10 @@ import { asArray } from '../../store/coffee';
 import { RemoveShoppingCart } from '@material-ui/icons';
 import CustomTable from '../Table/Table';
 
-export default function CartDetails({ state, dispatch, coffeeState }) {
-	const itemsCount = Object.keys(state).length;
+export default function CartDetails({ cartState, cartDispatch, coffeeState }) {
+	const itemsCount = Object.keys(cartState).length;
 	const ingredients = asArray(coffeeState)
-		.filter(({ id, type }) => state[`${type}_${id}`])
+		.filter(({ id, type }) => coffeeState[`${type}_${id}`])
 		.map(({ ingredients }) => ingredients);
 
 	console.log(ingredients);
@@ -29,9 +29,8 @@ export default function CartDetails({ state, dispatch, coffeeState }) {
 				<span />
 				<Button
 					disabled={!itemsCount}
-					onClick={() => dispatch({ type: Actions.CLEAR_ALL })}
+					onClick={() => cartDispatch({ type: Actions.CLEAR_ALL })}
 				>
-					{' '}
 					<RemoveShoppingCart /> Clear Cart
 				</Button>
 			</CardFooter>

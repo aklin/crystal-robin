@@ -6,7 +6,7 @@ import { useBasket } from '../../store/basket';
 import { useCoffeeStore } from '../../store/coffee';
 
 export default function CartView() {
-	const { state, dispatch } = useBasket();
+	const { state: cartState, dispatch: cartDispatch } = useBasket();
 	const { state: coffeeState } = useCoffeeStore();
 
 	return (
@@ -15,8 +15,8 @@ export default function CartView() {
 				<GridItem xs={12} sm={12} md={6}>
 					<CartDetails
 						coffeeState={coffeeState}
-						state={state}
-						dispatch={dispatch}
+						cartState={cartState}
+						cartDispatch={cartDispatch}
 					/>
 				</GridItem>
 			</GridContainer>
